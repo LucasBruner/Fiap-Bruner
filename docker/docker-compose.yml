@@ -1,0 +1,30 @@
+version: '3.8' # Versão do formato Docker Compose
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: java_app_container
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/nome_do_seu_banco?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: user_app
+      SPRING_DATASOURCE_PASSWORD: senha_app
+    depends_on:
+      - mysql_db
+  mysql_db:
+    image: mysql:8.0
+    container_name: mysql_db_container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_segura # Senha do usuário 'root'
+      MYSQL_DATABASE: nome_do_seu_banco         # Nome do banco de dados a ser criado
+      MYSQL_USER: user_app                      # Usuário para a aplicação
+      MYSQL_PASSWORD: senha_app                 # Senha para o usuário da aplicação
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
