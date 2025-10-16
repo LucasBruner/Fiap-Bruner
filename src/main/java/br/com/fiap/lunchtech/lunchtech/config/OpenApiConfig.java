@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI locaTech() {
+    public OpenAPI LunchTech() {
         return new OpenAPI().info(
-                new Info().title("Loca Tech API")
+                new Info().title("Lunchtech API")
                         .description("Projeto desenvolvido durante o curso Spring MVC")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("https://github.com/LucasBruner")));

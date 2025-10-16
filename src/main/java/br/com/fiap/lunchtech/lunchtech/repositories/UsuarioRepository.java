@@ -5,8 +5,8 @@ import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import java.util.List;
 import java.util.Optional;
 
-public interface IUsuarioRepository {
-    Optional<Usuario> findByName(String nomeUsuario);
+public interface UsuarioRepository {
+    Optional<Usuario> findByName(String name);
     List<Usuario> findAll(int size, int offset);
     Integer save(Usuario usuario);
     Integer update (Usuario usuario, String email);

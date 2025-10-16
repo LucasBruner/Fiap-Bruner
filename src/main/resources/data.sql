@@ -1,35 +1,16 @@
-CREATE TABLE veiculos (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    marca VARCHAR(255),
-    modelo VARCHAR(255),
-    placa VARCHAR(255),
-    ano INT,
-    cor VARCHAR(255),
-    valor_diaria decimal(10,2)
-);
-
-CREATE TABLE pessoa (
+CREATE TABLE usuario (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255),
-    cpf VARCHAR(255),
-    telefone VARCHAR(255),
-    email VARCHAR(255)
+    login VARCHAR(255),
+    senha VARCHAR(255),
+    email VARCHAR(255),
+    data_atualizacao DATE,
+    rua VARCHAR(255),
+    cep INT,
+    numero INT,
+    cidade VARCHAR(255),
+    tipo_usuario VARCHAR(255)
 );
 
-CREATE TABLE aluguel (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    pessoa_id BIGINT,
-    veiculo_id BIGINT,
-    veiculo_modelo varchar(255),
-    pessoa_cpf VARCHAR(255),
-    pessoa_nome VARCHAR(255),
-    data_inicio date,
-    data_fim date,
-    valor_total DECIMAL(10,2),
-    foreign key (pessoa_id) references pessoa(id),
-    foreign key (veiculo_id) references veiculos(id)
-);
-
-insert into veiculos (marca, modelo, placa, ano, cor, valor_diaria) values ('PEUGEOT', '206', 'MBR-8819', 2006, 'Azul', 88.90);
-insert into pessoa (nome, cpf, telefone, email) values ('João Pessoa', '255.534.552-24', '47596741353', 'joao@teste.com.br');
-insert into aluguel (pessoa_Id, veiculo_id, data_inicio, data_fim, valor_total) values (1, 1, '2024-10-1', '2024-10-15', 1550.00);
+insert into usuario (nome, login, senha, email, data_atualizacao, rua, cep, numero, cidade, tipo_usuario)
+values ('Brenda', 'blbernat', 'password', 'brenda@fiap.com', '2025-10-15', 'Rua 2 de Setembro', 89055555, 111, 'Blumenau', 'USUARIO');
