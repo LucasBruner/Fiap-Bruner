@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
+    //private Long id;
     private String nome;
     private String email; //Unique key
     private String login;
@@ -19,12 +20,12 @@ public class Usuario {
     private EnderecoDTO endereco;
     private TipoUsuario tipoUsuario;
 
-    public Usuario(UsuarioRequestDTO usuarioRequestDTO, EnderecoDTO endereco, TipoUsuario tipoUsuario) {
+    public Usuario(UsuarioRequestDTO usuarioRequestDTO, TipoUsuario tipoUsuario) {
         this.nome = usuarioRequestDTO.nome();
         this.email = usuarioRequestDTO.email();
         this.login = usuarioRequestDTO.login();
         this.senha = usuarioRequestDTO.senha();
-        this.endereco = endereco;
+        this.endereco = usuarioRequestDTO.enderecoDTO();
         this.tipoUsuario = tipoUsuario;
         this.dataAtualizacao = LocalDate.now();
     }
