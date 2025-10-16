@@ -1,10 +1,15 @@
 package br.com.fiap.lunchtech.lunchtech.entities;
 
 import br.com.fiap.lunchtech.lunchtech.dtos.EnderecoDTO;
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioRequestDTO;
 import br.com.fiap.lunchtech.lunchtech.enums.TipoUsuario;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
     private String nome;
     private String email; //Unique key
@@ -14,11 +19,11 @@ public class Usuario {
     private EnderecoDTO endereco;
     private TipoUsuario tipoUsuario;
 
-    public Usuario(String nome, String email, String login, String senha, EnderecoDTO endereco, TipoUsuario tipoUsuario) {
-        this.nome = nome;
-        this.email = email;
-        this.login = login;
-        this.senha = senha;
+    public Usuario(UsuarioRequestDTO usuarioRequestDTO, EnderecoDTO endereco, TipoUsuario tipoUsuario) {
+        this.nome = usuarioRequestDTO.nome();
+        this.email = usuarioRequestDTO.email();
+        this.login = usuarioRequestDTO.login();
+        this.senha = usuarioRequestDTO.senha();
         this.endereco = endereco;
         this.tipoUsuario = tipoUsuario;
         this.dataAtualizacao = LocalDate.now();
