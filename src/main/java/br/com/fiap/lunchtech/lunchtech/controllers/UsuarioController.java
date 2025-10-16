@@ -32,7 +32,7 @@ public class UsuarioController {
     //http://localhost:8080/usuarios?page=1&size=10
     @GetMapping
     public ResponseEntity<List<Usuario>> findAllUsuarios(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
-        logger.info("Foi acessado o endpoint de usuarios /usuarios");
+        logger.info("Foi acessado o endpoint de usuarios /usuarios - findAllUsuarios");
         List<Usuario> usuarios = this.usuarioService.findAllUsuarios(page, size);
         return ResponseEntity.ok(usuarios);
     }
