@@ -20,11 +20,11 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     }
 
     @Override
-    public Optional<Usuario> findByName(String nomeUsuario) {
-        return this.jdbcClient.sql("SELECT * FROM USUARIO where nome = :nomeUsuario")
+    public List<Usuario> findByName(String nomeUsuario) {
+        return this.jdbcClient.sql("SELECT * FROM USUARIO where upper(nome) = upper(:nomeUsuario)")
                 .param("nomeUsuario", nomeUsuario)
-                .query(Usuario.class)
-                .optional();
+                .query(new UsuarioRowMapper())
+                .list();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
         return this.jdbcClient.sql("SELECT * FROM USUARIO LIMIT :size OFFSET :offset")
                 .param("size", size)
                 .param("offset", offset)
-                .query(Usuario.class)
+                .query(new UsuarioRowMapper())
                 .list();
     }
 
@@ -50,24 +50,25 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
                 .param("cep", usuario.getEndereco().cep())
                 .param("numero", usuario.getEndereco().numero())
                 .param("cidade", usuario.getEndereco().cidade())
-                .param("tipo_usuario", usuario.getTipoUsuario())
+                .param("tipo_usuario", usuario.getTipoUsuario().name())
                 .update();
     }
 
     @Override
     public Integer update(Usuario usuario, String email) {
-        return this.jdbcClient.sql("UPDATE USUARIO set nome = :nome, login = :login, senha = :senha, email = :email, " +
+        return this.jdbcClient.sql("UPDATE USUARIO set nome = :nome, login = :login, email = :email, " +
                         "data_atualizacao = :data_atualizacao, rua = :rua, cep = :cep, numero = :numero, cidade = :cidade, tipo_usuario = :tipo_usuario" +
-                        " where email = :email")
+                        " where email = :emailAtual")
                 .param("nome",usuario.getNome())
                 .param("login",usuario.getLogin())
                 .param(EMAIL, usuario.getEmail())
+                .param("emailAtual", email)
                 .param(DATA_ATUALIZACAO, LocalDate.now())
                 .param("rua", usuario.getEndereco().rua())
                 .param("cep", usuario.getEndereco().cep())
                 .param("numero", usuario.getEndereco().numero())
                 .param("cidade", usuario.getEndereco().cidade())
-                .param("tipo_usuario", usuario.getTipoUsuario())
+                .param("tipo_usuario", usuario.getTipoUsuario().name())
                 .update();
     }
 

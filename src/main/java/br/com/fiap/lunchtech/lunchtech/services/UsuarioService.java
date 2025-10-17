@@ -22,7 +22,7 @@ public class UsuarioService {
         return this.usuarioRepository.findAll(size, offset);
     }
 
-    public Optional<Usuario> findUsuarioByName(String name) {
+    public List<Usuario> findUsuarioByName(String name) {
         return this.usuarioRepository.findByName(name);
     }
 
