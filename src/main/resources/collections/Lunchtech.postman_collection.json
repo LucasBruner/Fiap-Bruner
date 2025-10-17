@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "587d1834-a448-4c5f-85d1-af2d7a3c61bd",
+		"name": "Lunchtech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47549624",
+		"_collection_link": "https://emailaleatoriocinco-6197942.postman.co/workspace/Lucas-SeiLa's-Workspace~d96a523d-4357-42b0-84e9-fe6fb94fa9f7/collection/47549624-587d1834-a448-4c5f-85d1-af2d7a3c61bd?action=share&source=collection_link&creator=47549624"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "GET Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/usuarios?page=1&size=10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/usuarios/Joao",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuarios",
+								"Joao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Insere usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nome\": \"Joao\",\r\n        \"email\": \"joao@fiap.com\",\r\n        \"login\": \"bruner\",\r\n        \"senha\": \"password\",\r\n        \"endereco\": {\r\n            \"rua\": \"Rua 2 de Setembro\",\r\n            \"numero\": 111,\r\n            \"cidade\": \"Blumenau\",\r\n            \"cep\": 89055555\r\n        },\r\n        \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/usuarios",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT atualizar usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nome\": \"João\",\r\n        \"email\": \"joao@fiap.com\",\r\n        \"login\": \"bruner\",\r\n        \"endereco\": {\r\n            \"rua\": \"Rua 2 de Setembro\",\r\n            \"numero\": 112,\r\n            \"cidade\": \"Blumenau\",\r\n            \"cep\": 89055556\r\n        },\r\n        \"tipoUsuario\": \"USUARIO\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/usuarios/joao@fiap.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuarios",
+								"joao@fiap.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/usuarios/delete?email=joao@fiap.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuarios",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "joao@fiap.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/login?usuario=blbernat&password=passwords",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "blbernat"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
