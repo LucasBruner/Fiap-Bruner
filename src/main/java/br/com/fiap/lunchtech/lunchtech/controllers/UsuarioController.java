@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -29,7 +28,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    //http://localhost:8080/usuarios?page=1&size=10
     @GetMapping
     public ResponseEntity<List<Usuario>> findAllUsuarios(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
         logger.info("Foi acessado o endpoint de usuarios /usuarios - findAllUsuarios");
@@ -38,9 +36,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<Optional<Usuario>> findUsuarioByName(@PathVariable("name") String name) {
+    public ResponseEntity<List<Usuario>> findUsuarioByName(@PathVariable("name") String name) {
         logger.info("Foi realizado uma busca por nome");
-        Optional<Usuario> usuario = this.usuarioService.findUsuarioByName(name);
+        List<Usuario> usuario = this.usuarioService.findUsuarioByName(name);
         return ResponseEntity.ok(usuario);
     }
 
@@ -51,15 +49,15 @@ public class UsuarioController {
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{email}")
     public ResponseEntity<Void> updateUsuario(@RequestBody Usuario usuario, @PathVariable("email") String email) {
         logger.info("PUT -> /usuarios");
         this.usuarioService.updateUsuario(usuario, email);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuario(@PathVariable("email") String email) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteUsuario(@RequestParam("email") String email) {
         logger.info("DELETE -> /usuarios");
         this.usuarioService.deleteUsuario(email);
         return ResponseEntity.ok().build();

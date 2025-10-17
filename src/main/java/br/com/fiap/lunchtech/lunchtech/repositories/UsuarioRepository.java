@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepository {
-    Optional<Usuario> findByName(String name);
+    List<Usuario> findByName(String name);
     List<Usuario> findAll(int size, int offset);
     Integer save(Usuario usuario);
     Integer update (Usuario usuario, String email);
