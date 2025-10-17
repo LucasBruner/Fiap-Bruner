@@ -87,4 +87,20 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
                 .param("senha", newPassword)
                 .update();
     }
+
+    @Override
+    public Optional<String> findUsername(String username) {
+        return this.jdbcClient.sql("SELECT max(login) FROM USUARIO where login = :username")
+                .param("username", username)
+                .query(String.class)
+                .optional();
+    }
+
+    @Override
+    public Optional<String> getPassword(String username) {
+        return this.jdbcClient.sql("SELECT max(senha) FROM USUARIO where login = :username")
+                .param("username", username)
+                .query(String.class)
+                .optional();
+    }
 }

@@ -29,7 +29,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAllUsuarios(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+    public ResponseEntity<List<Usuario>> findAllUsuarios(@RequestParam("page") Integer page,
+                                                         @RequestParam("size") Integer size) {
         logger.info("Foi acessado o endpoint de usuarios /usuarios - findAllUsuarios");
         List<Usuario> usuarios = this.usuarioService.findAllUsuarios(page, size);
         return ResponseEntity.ok(usuarios);
@@ -50,7 +51,8 @@ public class UsuarioController {
     }
 
     @PutMapping("/{email}")
-    public ResponseEntity<Void> updateUsuario(@RequestBody Usuario usuario, @PathVariable("email") String email) {
+    public ResponseEntity<Void> updateUsuario(@RequestBody Usuario usuario,
+                                              @PathVariable("email") String email) {
         logger.info("PUT -> /usuarios");
         this.usuarioService.updateUsuario(usuario, email);
         return ResponseEntity.ok().build();
@@ -60,6 +62,14 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteUsuario(@RequestParam("email") String email) {
         logger.info("DELETE -> /usuarios");
         this.usuarioService.deleteUsuario(email);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/changePassword/{email}")
+    public ResponseEntity<Void> changePassword(@PathVariable("email") String email,
+                                               @RequestParam("password") String password) {
+        logger.info("PUT -> /changePassword");
+        usuarioService.changePassword(email, password);
         return ResponseEntity.ok().build();
     }
 }

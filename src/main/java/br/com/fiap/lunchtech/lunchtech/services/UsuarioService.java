@@ -44,4 +44,11 @@ public class UsuarioService {
             throw new RuntimeException("Usuário não encontrado.");
         }
     }
+
+    public void changePassword(String email, String password) {
+        Integer update = this.usuarioRepository.updatePassword(email, password);
+        if(update == 0) {
+            throw new RuntimeException("Usuário não encontrado.");
+        }
+    }
 }
