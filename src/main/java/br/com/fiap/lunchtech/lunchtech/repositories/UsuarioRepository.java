@@ -12,4 +12,7 @@ public interface UsuarioRepository {
     Integer update (Usuario usuario, String email);
     Integer delete(String email);
     Integer updatePassword(String email, String newPassword);
+    Optional<String> findUsername(String username);
+
+    Optional<String> getPassword(String username);
 }
