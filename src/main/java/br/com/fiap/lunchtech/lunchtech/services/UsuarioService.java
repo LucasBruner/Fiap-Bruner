@@ -1,12 +1,9 @@
 package br.com.fiap.lunchtech.lunchtech.services;
 
-import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioRequestDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.repositories.UsuarioRepository;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.CreateUserException;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.ResourceNotFoundException;
-import ch.qos.logback.classic.Logger;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +11,7 @@ import java.util.List;
 
 @Service
 public class UsuarioService {
-    Logger log;
+
     private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -38,7 +35,6 @@ public class UsuarioService {
         } catch (RuntimeException e) {
             throw new ResourceNotFoundException("Houve um erro ao criar usuário! " + e.getMessage());
         }
-
     }
 
     public void updateUsuario(Usuario usuario, String email) {
