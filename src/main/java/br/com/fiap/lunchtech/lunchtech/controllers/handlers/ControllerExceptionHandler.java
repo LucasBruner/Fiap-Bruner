@@ -1,8 +1,10 @@
 package br.com.fiap.lunchtech.lunchtech.controllers.handlers;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.CreateUserDTO;
 import br.com.fiap.lunchtech.lunchtech.dtos.InvalidLoginDTO;
 import br.com.fiap.lunchtech.lunchtech.dtos.MethodArgumentDTO;
 import br.com.fiap.lunchtech.lunchtech.dtos.ResourceNotFoundDTO;
+import br.com.fiap.lunchtech.lunchtech.services.exceptions.CreateUserException;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.InvalidLoginException;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -38,5 +40,11 @@ public class ControllerExceptionHandler {
     public ResponseEntity<InvalidLoginDTO> handlerInvalidLoginException(InvalidLoginException e) {
         HttpStatus status = HttpStatus.UNAUTHORIZED;
         return ResponseEntity.status(status.value()).body(new InvalidLoginDTO(e.getMessage(), status.value()));
+    }
+
+    @ExceptionHandler(CreateUserException.class)
+    public ResponseEntity<CreateUserDTO> handlerCreateUserException(CreateUserException e) {
+        HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
+        return ResponseEntity.status(status.value()).body(new CreateUserDTO(e.getMessage(), status.value()));
     }
 }

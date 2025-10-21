@@ -13,6 +13,6 @@ public interface UsuarioRepository {
     Integer delete(String email);
     Integer updatePassword(String email, String newPassword);
     Optional<String> findUsername(String username);
-
     Optional<String> getPassword(String username);
+    Optional<String> getEmail(String email);
 }

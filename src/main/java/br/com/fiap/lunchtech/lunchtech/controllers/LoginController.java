@@ -1,8 +1,6 @@
 package br.com.fiap.lunchtech.lunchtech.controllers;
 
 import br.com.fiap.lunchtech.lunchtech.services.LoginService;
-import br.com.fiap.lunchtech.lunchtech.services.UsuarioService;
-import br.com.fiap.lunchtech.lunchtech.services.exceptions.InvalidLoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +21,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> userLogin(@RequestParam String usuario,
-                                          @RequestParam String password) {
+    public ResponseEntity<Void> userLogin(@RequestParam("usuario") String usuario,
+                                          @RequestParam("password") String password) {
         logger.info("[Login] - Iniciando o processo de login do usuário {}.", usuario);
         loginService.validateLogin(usuario, password);
         return ResponseEntity.ok().build();
