@@ -1,17 +1,20 @@
 package br.com.fiap.lunchtech.lunchtech.services;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioRequestDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.repositories.UsuarioRepository;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.CreateUserException;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.ResourceNotFoundException;
+import ch.qos.logback.classic.Logger;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
-
+    Logger log;
     private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -28,15 +31,14 @@ public class UsuarioService {
     }
 
     public void saveUsuario(Usuario usuario) {
-        Optional<String> validateEmail = this.usuarioRepository.getEmail(usuario.getEmail());
-        if (validateEmail.isPresent()) {
-            throw new CreateUserException("Já existe um usuário cadastrado com este email: " + usuario.getEmail());
+        try {
+            Integer save = this.usuarioRepository.save(usuario);
+        } catch (DataIntegrityViolationException e){
+            throw new CreateUserException("Já existe um usuário cadastrado com esse email: " + usuario.getEmail());
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException("Houve um erro ao criar usuário! " + e.getMessage());
         }
 
-        Integer save = this.usuarioRepository.save(usuario);
-        if (save != 1) {
-            throw new ResourceNotFoundException("Houve um erro ao criar usuário!");
-        }
     }
 
     public void updateUsuario(Usuario usuario, String email) {

@@ -1,5 +1,6 @@
 package br.com.fiap.lunchtech.lunchtech.repositories;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioRequestDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 
 import java.util.List;
@@ -14,5 +15,4 @@ public interface UsuarioRepository {
     Integer updatePassword(String email, String newPassword);
     Optional<String> findUsername(String username);
     Optional<String> getPassword(String username);
-    Optional<String> getEmail(String email);
 }

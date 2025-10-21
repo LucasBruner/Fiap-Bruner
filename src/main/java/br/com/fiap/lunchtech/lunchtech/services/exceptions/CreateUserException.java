@@ -1,6 +1,8 @@
 package br.com.fiap.lunchtech.lunchtech.services.exceptions;
 
-public class CreateUserException extends RuntimeException {
+import org.springframework.dao.DataIntegrityViolationException;
+
+public class CreateUserException extends DataIntegrityViolationException {
     public CreateUserException(String e) {
         super(e);
     }

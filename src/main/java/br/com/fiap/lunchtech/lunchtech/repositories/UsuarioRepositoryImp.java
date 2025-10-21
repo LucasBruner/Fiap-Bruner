@@ -1,5 +1,6 @@
 package br.com.fiap.lunchtech.lunchtech.repositories;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioRequestDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -100,14 +101,6 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     public Optional<String> getPassword(String username) {
         return this.jdbcClient.sql("SELECT max(senha) FROM USUARIO where login = :username")
                 .param("username", username)
-                .query(String.class)
-                .optional();
-    }
-
-    @Override
-    public Optional<String> getEmail(String email) {
-        return this.jdbcClient.sql("SELECT max(email) FROM USUARIO where email = :email")
-                .param("email", email)
                 .query(String.class)
                 .optional();
     }
