@@ -1,7 +1,6 @@
 package br.com.fiap.lunchtech.lunchtech.services;
 
 import br.com.fiap.lunchtech.lunchtech.controllers.LoginController;
-import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.repositories.UsuarioRepository;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.InvalidLoginException;
 import org.slf4j.Logger;
