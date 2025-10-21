@@ -4,10 +4,10 @@ import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.repositories.UsuarioRepository;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.CreateUserException;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.ResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -28,14 +28,12 @@ public class UsuarioService {
     }
 
     public void saveUsuario(Usuario usuario) {
-        Optional<String> validateEmail = this.usuarioRepository.getEmail(usuario.getEmail());
-        if (validateEmail.isPresent()) {
-            throw new CreateUserException("Já existe um usuário cadastrado com este email: " + usuario.getEmail());
-        }
-
-        Integer save = this.usuarioRepository.save(usuario);
-        if (save != 1) {
-            throw new ResourceNotFoundException("Houve um erro ao criar usuário!");
+        try {
+            Integer save = this.usuarioRepository.save(usuario);
+        } catch (DataIntegrityViolationException e){
+            throw new CreateUserException("Já existe um usuário cadastrado com esse email: " + usuario.getEmail());
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException("Houve um erro ao criar usuário! " + e.getMessage());
         }
     }
 
