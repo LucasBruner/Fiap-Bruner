@@ -52,6 +52,10 @@ public class UsuarioService {
     }
 
     public void changePassword(String email, String password) {
+        if (password.isBlank()) {
+            throw new ResourceNotFoundException("A nova senha não pode ser vazia!");
+        }
+
         Integer update = this.usuarioRepository.updatePassword(email, password);
         if (update == 0) {
             throw new ResourceNotFoundException("Usuário não encontrado!");
