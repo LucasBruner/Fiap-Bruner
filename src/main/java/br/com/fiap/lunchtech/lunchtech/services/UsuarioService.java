@@ -1,5 +1,6 @@
 package br.com.fiap.lunchtech.lunchtech.services;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioResponseDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.repositories.UsuarioRepository;
 import br.com.fiap.lunchtech.lunchtech.services.exceptions.CreateUserException;
@@ -60,5 +61,14 @@ public class UsuarioService {
         if (update == 0) {
             throw new ResourceNotFoundException("Usuário não encontrado!");
         }
+    }
+
+    public UsuarioResponseDTO getResponseUserBody(Usuario usuario) {
+        return new UsuarioResponseDTO(usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getLogin(),
+                usuario.getDataAtualizacao(),
+                usuario.getEndereco(),
+                usuario.getTipoUsuario());
     }
 }

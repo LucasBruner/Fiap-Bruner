@@ -22,7 +22,6 @@ public class UsuarioRowMapper implements RowMapper<Usuario> {
         usuario.setNome(rs.getString("NOME"));
         usuario.setEmail(rs.getString("EMAIL"));
         usuario.setLogin(rs.getString("LOGIN"));
-        usuario.setSenha(rs.getString("SENHA"));
         usuario.setEndereco(enderecoDTO);
 
         Timestamp dataAtualizacaoSql = rs.getTimestamp("DATA_ATUALIZACAO");

@@ -23,7 +23,7 @@ public class Usuario {
 
     @Email(message = "O formato do email é inválido!")
     @NotBlank(message = "É obrigatório informar o email!")
-    private String email; //Unique key
+    private String email;
 
     @NotBlank(message = "É obrigatório informar o login!")
     private String login;
