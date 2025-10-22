@@ -40,15 +40,28 @@ Contribuições são sempre bem-vindas! Veja como:
 4. Push para a Branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-## Licença
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+
+### Exemplos de Uso
+Para buscar usuários por nome:
+
+GET /usuarios/{name}
+
+# Docker
+* ### Para utilizar a aplicação via docker é necessário gerar o .jar da aplicação para isso faça os seguintes passos:
+#### 1. mvn clean package ou  ./mvnw clean package -DskipTests
+#### 2. Acessar o diretório LunchTech/docker
+#### 3. Rodar o comando docker-compose up(caso queira acompanhar os logs) ou docker-compose up -d
+#### 4. A aplicação estará rodando na porta http://localhost:8080
+
+* ###  Caso queira rodar a aplicação local e utilizar o banco via docker:
+#### 1. Acessar o diretório LunchTech/docker
+#### 2. Rodar o comando docker compose -f docker-compose-mysql.yml up(caso queira acompanhar os logs) ou docker compose -f docker-compose-mysql.yml up -d
+#### 3. Iniciar a aplicação manualmente ou via IDE.
 
 ## Contato
 Lucas Bruner - lucasbrunerbruner@gmail.com
 Brenda Bernat - brendalouisebernat@gmail.com
 Fernanda Beber - nandaa_k@hotmail.com
 
-### Exemplos de Uso
-Para buscar usuários por nome:
-
-GET /usuarios/{name}
+## Licença
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.

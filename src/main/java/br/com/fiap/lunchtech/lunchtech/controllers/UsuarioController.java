@@ -1,5 +1,6 @@
 package br.com.fiap.lunchtech.lunchtech.controllers;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioResponseDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -38,11 +40,14 @@ public class UsuarioController {
         description = "Busca todos os usuários. Deve-se informar a página e o tamanho da paginação para o retorno dos resultados. Retorna uma lista de JSON. Exemplo URL: http://localhost:8080/usuarios?page=1&size=10",
         responses = { @ApiResponse(description = "Ok", responseCode = "200")})
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAllUsuarios(@RequestParam("page") Integer page,
+    public ResponseEntity<List<UsuarioResponseDTO>> findAllUsuarios(@RequestParam("page") Integer page,
                                                          @RequestParam("size") Integer size) {
         logger.info("GET -> /usuarios");
         List<Usuario> usuarios = this.usuarioService.findAllUsuarios(page, size);
-        return ResponseEntity.ok(usuarios);
+        List<UsuarioResponseDTO> userBody = usuarios.stream()
+                .map(usuarioService::getResponseUserBody)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(userBody);
     }
 
     @Operation(
@@ -50,10 +55,13 @@ public class UsuarioController {
         description = "Busca usuários por nome. Deve-se informar na URL um nome para o retorno dos resultados. Retorna uma lista de JSON. Exemplo URL: http://localhost:8080/usuarios/brenda",
         responses = { @ApiResponse(description = "Ok", responseCode = "200")})
     @GetMapping("/{name}")
-    public ResponseEntity<List<Usuario>> findUsuarioByName(@PathVariable("name") String name) {
+    public ResponseEntity<List<UsuarioResponseDTO>> findUsuarioByName(@PathVariable("name") String name) {
         logger.info("GET -> /usuarios/name");
         List<Usuario> usuario = this.usuarioService.findUsuarioByName(name);
-        return ResponseEntity.ok(usuario);
+        List<UsuarioResponseDTO> userBody = usuario.stream()
+                .map(usuarioService::getResponseUserBody)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(userBody);
     }
 
     @Operation(

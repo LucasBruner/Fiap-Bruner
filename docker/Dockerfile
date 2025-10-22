@@ -1,8 +1,8 @@
-FROM openjdk:24-rc-nanoserver-ltsc2025 # Escolha sua versão do JDK
+FROM openjdk:24-oraclelinux9
 WORKDIR /app
 
-COPY target/app.jar /app/app.jar
+COPY target/lunchtech-0.0.1-SNAPSHOT.jar /app/lunchtech-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "lunchtech-0.0.1-SNAPSHOT.jar"]
