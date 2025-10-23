@@ -1,0 +1,375 @@
+{
+	"info": {
+		"_postman_id": "7ee62d33-6ae4-477d-a084-5a74b4402bfd",
+		"name": "LunchTech - TechChallenge FIAP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49308963",
+		"_collection_link": "https://blbernat-3353651.postman.co/workspace/Brenda's-Workspace~db25d338-4d77-4f10-8afd-35e56a5475c1/collection/49308963-7ee62d33-6ae4-477d-a084-5a74b4402bfd?action=share&source=collection_link&creator=49308963"
+	},
+	"item": [
+		{
+			"name": "api-v1",
+			"item": [
+				{
+					"name": "Buscar todos os usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios?page=1&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar usuario por nome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/Brenda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"Brenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro de usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joao\",\r\n    \"email\": \"joao@fiap.com\",\r\n    \"login\": \"bruner\",\r\n    \"senha\": \"password\",\r\n    \"endereco\": {\"rua\": \"Rua 2 de Setembro\",\"numero\": 111,\"cidade\": \"Blumenau\",\"cep\": 89055555},\r\n    \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro de usuário - email duplicado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Brenda 2\",\r\n    \"email\": \"brenda@fiap.com\",\r\n    \"login\": \"brenda 2\",\r\n    \"senha\": \"password1\",\r\n    \"endereco\": {\"rua\": \"Rua 2 de Setembro\",\"numero\": 111,\"cidade\": \"Blumenau\",\"cep\": 89055555},\r\n    \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro de usuário - inválido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joao\",\r\n    \"login\": \"bruner\",\r\n    \"senha\": \"password\",\r\n    \"endereco\": {\"rua\": \"Rua 2 de Setembro\",\"numero\": 111,\"cidade\": \"Blumenau\",\"cep\": 89055555},\r\n    \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fazer login usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/login?usuario=blbernat&password=password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"login"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "blbernat"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fazer login usuário - inválido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/login?usuario=blbernat&password=wrongPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"login"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "blbernat"
+								},
+								{
+									"key": "password",
+									"value": "wrongPassword"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar dados do usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"Brenda\",\r\n        \"email\": \"brenda@fiap.com\",\r\n        \"login\": \"blbernat\",\r\n        \"senha\": \"password\",\r\n        \"endereco\": {\r\n            \"rua\": \"Rua 2 de Setembro\",\r\n            \"numero\": 12345,\r\n            \"cidade\": \"Blumenau\",\r\n            \"cep\": 89055555\r\n        },\r\n        \"tipoUsuario\": \"USUARIO\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/brenda@fiap.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"brenda@fiap.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar dados do usuário - inválido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"\",\r\n        \"email\": \"email errado\",\r\n        \"login\": \"blbernat\",\r\n        \"senha\": \"password\",\r\n        \"endereco\": {\r\n            \"rua\": \"Rua 2 de Setembro\",\r\n            \"numero\": 12345,\r\n            \"cidade\": \"Blumenau\",\r\n            \"cep\": 89055555\r\n        },\r\n        \"tipoUsuario\": \"USUARIO\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/brenda@fiap.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"brenda@fiap.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar senha do usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joao\",\r\n    \"email\": \"joao@fiap.com\",\r\n    \"login\": \"bruner\",\r\n    \"senha\": \"password\",\r\n    \"endereco\": {\"rua\": \"Rua 2 de Setembro\",\"numero\": 222,\"cidade\": \"Blumenau\",\"cep\": 89055555},\r\n    \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/change-password/joao@fiap.com?password=123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"change-password",
+								"joao@fiap.com"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar senha do usuário - inválido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joao\",\r\n    \"email\": \"joao@fiap.com\",\r\n    \"login\": \"bruner\",\r\n    \"senha\": \"password\",\r\n    \"endereco\": {\"rua\": \"Rua 2 de Setembro\",\"numero\": 222,\"cidade\": \"Blumenau\",\"cep\": 89055555},\r\n    \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/change-password/joao@fiap.com?password=123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"change-password",
+								"joao@fiap.com"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/usuarios/delete?email=joao@fiap.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"usuarios",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "joao@fiap.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

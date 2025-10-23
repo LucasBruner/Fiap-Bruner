@@ -7,29 +7,49 @@ Como objetivo final, o projeto deve ser um sistema robusto que permita a restaur
 
 ## Tecnologias Utilizadas
 - Java
-- Spring
+- Spring Boot
 - Spring Data JDBC
+- Maven
 - MySQL
-- Docker
-- Lombok
+- Docker e Docker Compose
+- Swagger
+- Postman
 
 ## Como Configurar
 ### Pré-requisitos
 - Java JDK 24
-- MySQL 
 - Maven
+- MySQL 
+- Docker
+- Postman
 
 ### Instalação
-1. Clone o repositório:
+1. Clone o repositório: `git clone https://github.com/LucasBruner/Fiap-Bruner.git`
+2. Instale as dependências e rodar o projeto com o docker, conforme passo a passo do próximo tópico:
 
-git clone https://github.com/LucasBruner/Fiap-Bruner.git
+### Docker
+* #### Para utilizar a aplicação via docker é necessário gerar o `.jar` da aplicação. Para isso faça os seguintes passos:
+1. Rodar o comando `mvn clean package` ou `./mvnw clean package -DskipTests`
+2. Acessar o diretório `LunchTech/docker`
+3. Rodar o comando `docker-compose up` (caso queira acompanhar os logs) ou `docker-compose up -d`
+4. A aplicação estará rodando na porta http://localhost:8080
 
-2. Instale as dependências:
+* ####  Caso queira rodar a aplicação local e utilizar o banco via docker:
+1. Acessar o diretório `LunchTech/docker`
+2. Rodar o comando `docker compose -f docker-compose-mysql.yml up` (caso queira acompanhar os logs) ou `docker compose -f docker-compose-mysql.yml up -d`
+3. Iniciar a aplicação manualmente ou via IDE
 
-cd fiap-bruner
-mvn clean package
+## Documentação da API (Swagger)
+- Após iniciar o projeto, acesse a documentação Swagger em: http://localhost:8080/swagger-ui/index.html
+- O controle de versionamento também pode ser visualizado pela documentação no Swagger. Para melhor entendimento, leia o exemplo: https://dzone.com/articles/versioning-rest-api-with-spring-boot-and-swagger
 
-A API estará disponível em `http://localhost:8080`.
+## Exemplos de Uso
+
+Para verificar se a aplicação está rodando corretamente e ter acesso aos endpoints, utilize as Collections no Postman, conforme os seguintes passos:
+1. Salve num arquivo local o conteúdo do arquivo `src/main/resources/collections/Lunchtech.postman_collection.json`
+2. Abra o Postman via desktop ou pela web (https://www.postman.com/)
+3. Na aba "Collections", clique na opção "Import" e selecione o arquivo `.json` salvo no primeiro passo
+4. Cada endpoint possui testes válidos e inválidos que já estão prontos para serem executados!
 
 ## Como Contribuir
 Contribuições são sempre bem-vindas! Veja como:
@@ -40,28 +60,10 @@ Contribuições são sempre bem-vindas! Veja como:
 4. Push para a Branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-
-### Exemplos de Uso
-Para buscar usuários por nome:
-
-GET /usuarios/{name}
-
-# Docker
-* ### Para utilizar a aplicação via docker é necessário gerar o .jar da aplicação para isso faça os seguintes passos:
-#### 1. mvn clean package ou  ./mvnw clean package -DskipTests
-#### 2. Acessar o diretório LunchTech/docker
-#### 3. Rodar o comando docker-compose up(caso queira acompanhar os logs) ou docker-compose up -d
-#### 4. A aplicação estará rodando na porta http://localhost:8080
-
-* ###  Caso queira rodar a aplicação local e utilizar o banco via docker:
-#### 1. Acessar o diretório LunchTech/docker
-#### 2. Rodar o comando docker compose -f docker-compose-mysql.yml up(caso queira acompanhar os logs) ou docker compose -f docker-compose-mysql.yml up -d
-#### 3. Iniciar a aplicação manualmente ou via IDE.
-
 ## Contato
-Lucas Bruner - lucasbrunerbruner@gmail.com
-Brenda Bernat - brendalouisebernat@gmail.com
-Fernanda Beber - nandaa_k@hotmail.com
+- Lucas Bruner - lucasbrunerbruner@gmail.com
+- Brenda Bernat - brendalouisebernat@gmail.com
+- Fernanda Beber - nandaa_k@hotmail.com
 
 ## Licença
 Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
