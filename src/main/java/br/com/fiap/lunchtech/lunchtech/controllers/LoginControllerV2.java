@@ -28,6 +28,7 @@ public class LoginControllerV2 {
         summary = "Login de usuário - v2",
         description = "Método criado para demonstração do versionamento da API. Faz a validação de usuário e senha para login. Deve-se informar o login de usuario e senha. Exemplo: http://localhost:8080/login?usuario=blbernat&password=123",
         responses = { @ApiResponse(description = "Ok", responseCode = "200"), @ApiResponse(description = "Unauthorized", responseCode = "401")})
+    @PostMapping
     public ResponseEntity<Void> userLoginV2(@RequestParam("usuario") String usuario, @RequestParam("password") String password) {
         logger.info("[Login - v2] - Iniciando o processo de login (versão 2) do usuário {}.", usuario);
         loginService.validateLogin(usuario, password);

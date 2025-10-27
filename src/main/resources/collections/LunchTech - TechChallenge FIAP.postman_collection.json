@@ -275,7 +275,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Joao\",\r\n    \"email\": \"joao@fiap.com\",\r\n    \"login\": \"bruner\",\r\n    \"senha\": \"password\",\r\n    \"endereco\": {\"rua\": \"Rua 2 de Setembro\",\"numero\": 222,\"cidade\": \"Blumenau\",\"cep\": 89055555},\r\n    \"tipoUsuario\": \"DONO_RESTAURANTE\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,7 +348,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/delete?email=joao@fiap.com",
+							"raw": "http://localhost:8080/v1/usuarios/joao@fiap.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -357,13 +357,7 @@
 							"path": [
 								"v1",
 								"usuarios",
-								"delete"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "joao@fiap.com"
-								}
+								"joao@fiap.com"
 							]
 						}
 					},

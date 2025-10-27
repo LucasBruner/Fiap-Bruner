@@ -44,10 +44,7 @@ public class UsuarioController {
                                                          @RequestParam("size") Integer size) {
         logger.info("GET -> /usuarios");
         List<Usuario> usuarios = this.usuarioService.findAllUsuarios(page, size);
-        List<UsuarioResponseDTO> userBody = usuarios.stream()
-                .map(usuarioService::getResponseUserBody)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(userBody);
+        return ResponseEntity.ok(convertUserToDTO(usuarios));
     }
 
     @Operation(
@@ -58,10 +55,7 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioResponseDTO>> findUsuarioByName(@PathVariable("name") String name) {
         logger.info("GET -> /usuarios/name");
         List<Usuario> usuario = this.usuarioService.findUsuarioByName(name);
-        List<UsuarioResponseDTO> userBody = usuario.stream()
-                .map(usuarioService::getResponseUserBody)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(userBody);
+        return ResponseEntity.ok(convertUserToDTO(usuario));
     }
 
     @Operation(
@@ -91,8 +85,8 @@ public class UsuarioController {
         summary = "Exclusão de usuário",
         description = "Exclusão de usuário. Deve-se informar o email do usuário que será excluído. Exemplo: http://localhost:8080/usuarios/delete?email=joao@fiap.com",
         responses = { @ApiResponse(description = "Ok", responseCode = "200"), @ApiResponse(description = "Not found", responseCode = "404")})
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteUsuario(@RequestParam("email") String email) {
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deleteUsuario(@PathVariable("email") String email) {
         logger.info("DELETE -> /usuarios");
         this.usuarioService.deleteUsuario(email);
         return ResponseEntity.ok().build();
@@ -108,5 +102,11 @@ public class UsuarioController {
         logger.info("PUT -> /change-password");
         usuarioService.changePassword(email, password);
         return ResponseEntity.ok().build();
+    }
+
+    private List<UsuarioResponseDTO> convertUserToDTO(List<Usuario> usuarios) {
+        return usuarios.stream()
+                .map(usuarioService::getResponseUserBody)
+                .collect(Collectors.toList());
     }
 }
