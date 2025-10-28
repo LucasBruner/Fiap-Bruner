@@ -1,5 +1,7 @@
 package br.com.fiap.lunchtech.lunchtech.repositories;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioCreateDTO;
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioUpdateDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -37,38 +39,38 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     }
 
     @Override
-    public Integer save(Usuario usuario) {
+    public Integer save(UsuarioCreateDTO usuario) {
         return this.jdbcClient.sql("INSERT INTO USUARIO " +
                         " (nome, login, senha, email, data_atualizacao, rua, cep, numero, cidade, tipo_usuario) " +
                         " values(:nome, :login, :senha, :email, :data_atualizacao, :rua, :cep, :numero, :cidade, :tipo_usuario)")
-                .param("nome",usuario.getNome())
-                .param("login",usuario.getLogin())
-                .param("senha", usuario.getSenha())
-                .param(EMAIL, usuario.getEmail())
+                .param("nome",usuario.nome())
+                .param("login",usuario.login())
+                .param("senha", usuario.senha())
+                .param(EMAIL, usuario.email())
                 .param(DATA_ATUALIZACAO, LocalDate.now())
-                .param("rua", usuario.getEndereco().rua())
-                .param("cep", usuario.getEndereco().cep())
-                .param("numero", usuario.getEndereco().numero())
-                .param("cidade", usuario.getEndereco().cidade())
-                .param("tipo_usuario", usuario.getTipoUsuario().name())
+                .param("rua", usuario.endereco().rua())
+                .param("cep", usuario.endereco().cep())
+                .param("numero", usuario.endereco().numero())
+                .param("cidade", usuario.endereco().cidade())
+                .param("tipo_usuario", usuario.tipoUsuario().name())
                 .update();
     }
 
     @Override
-    public Integer update(Usuario usuario, String email) {
+    public Integer update(UsuarioUpdateDTO usuario, String email) {
         return this.jdbcClient.sql("UPDATE USUARIO set nome = :nome, login = :login, email = :email, " +
                         "data_atualizacao = :data_atualizacao, rua = :rua, cep = :cep, numero = :numero, cidade = :cidade, tipo_usuario = :tipo_usuario" +
                         " where email = :emailAtual")
-                .param("nome",usuario.getNome())
-                .param("login",usuario.getLogin())
-                .param(EMAIL, usuario.getEmail())
+                .param("nome",usuario.nome())
+                .param("login",usuario.login())
+                .param(EMAIL, usuario.email())
                 .param("emailAtual", email)
                 .param(DATA_ATUALIZACAO, LocalDate.now())
-                .param("rua", usuario.getEndereco().rua())
-                .param("cep", usuario.getEndereco().cep())
-                .param("numero", usuario.getEndereco().numero())
-                .param("cidade", usuario.getEndereco().cidade())
-                .param("tipo_usuario", usuario.getTipoUsuario().name())
+                .param("rua", usuario.endereco().rua())
+                .param("cep", usuario.endereco().cep())
+                .param("numero", usuario.endereco().numero())
+                .param("cidade", usuario.endereco().cidade())
+                .param("tipo_usuario", usuario.tipoUsuario().name())
                 .update();
     }
 

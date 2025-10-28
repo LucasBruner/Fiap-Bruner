@@ -1,6 +1,8 @@
 package br.com.fiap.lunchtech.lunchtech.controllers;
 
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioCreateDTO;
 import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioResponseDTO;
+import br.com.fiap.lunchtech.lunchtech.dtos.UsuarioUpdateDTO;
 import br.com.fiap.lunchtech.lunchtech.entities.Usuario;
 import br.com.fiap.lunchtech.lunchtech.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/usuarios")
@@ -63,7 +64,7 @@ public class UsuarioController {
         description = "Criação de novo usuário, onde são feitas as validações das regras dos campos e salva o novo usuário. Deve-se informar um JSON com as informações de usuário.",
         responses = { @ApiResponse(description = "Created", responseCode = "201"), @ApiResponse(description = "Bad request", responseCode = "400")})
     @PostMapping
-    public ResponseEntity<Void> saveUsuario(@Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<Void> saveUsuario(@Valid @RequestBody UsuarioCreateDTO usuario) {
         logger.info("POST -> /usuarios");
         this.usuarioService.saveUsuario(usuario);
         return ResponseEntity.status(201).build();
@@ -74,7 +75,7 @@ public class UsuarioController {
         description = "Alteração de informações do usuário, onde são feitas as validações das regras dos campos e atualiza as informações do usuário. Deve-se informar um JSON com as informações de usuário e na URL informar o email do usuário que será alterado. A data de alteração será atualizada automaticamente com a data atual do sistema.",
         responses = { @ApiResponse(description = "Ok", responseCode = "200"), @ApiResponse(description = "Bad request", responseCode = "400")})
     @PutMapping("/{email}")
-    public ResponseEntity<Void> updateUsuario(@Valid @RequestBody Usuario usuario,
+    public ResponseEntity<Void> updateUsuario(@Valid @RequestBody UsuarioUpdateDTO usuario,
                                               @PathVariable("email") String email) {
         logger.info("PUT -> /usuarios");
         this.usuarioService.updateUsuario(usuario, email);
@@ -107,6 +108,6 @@ public class UsuarioController {
     private List<UsuarioResponseDTO> convertUserToDTO(List<Usuario> usuarios) {
         return usuarios.stream()
                 .map(usuarioService::getResponseUserBody)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

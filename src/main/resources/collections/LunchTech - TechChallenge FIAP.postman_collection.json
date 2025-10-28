@@ -320,7 +320,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/change-password/joao@fiap.com?password=123",
+							"raw": "http://localhost:8080/v1/usuarios/change-password/joao@fiap.com?password=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -334,9 +334,8 @@
 							],
 							"query": [
 								{
-									"key": "password",
-									"value": "123"
-								}
+									"key": "password"
+                                }
 							]
 						}
 					},
