@@ -29,10 +29,9 @@ Como objetivo final, o projeto deve ser um sistema robusto que permita a restaur
 
 ### Docker
 * #### Para utilizar a aplicação via docker é necessário gerar o `.jar` da aplicação. Para isso faça os seguintes passos:
-1. Rodar o comando `mvn clean package` ou `./mvnw clean package -DskipTests`
-2. Acessar o diretório `LunchTech/docker`
-3. Rodar o comando `docker-compose up` (caso queira acompanhar os logs) ou `docker-compose up -d`
-4. A aplicação estará rodando na porta http://localhost:8080
+1. Acessar o diretório `LunchTech/docker`
+2. Rodar o comando `docker-compose up` (caso queira acompanhar os logs) ou `docker-compose up -d`
+3. A aplicação estará rodando na porta http://localhost:8080
 
 * ####  Caso queira rodar a aplicação local e utilizar o banco via docker:
 1. Acessar o diretório `LunchTech/docker`
@@ -63,7 +62,6 @@ Contribuições são sempre bem-vindas! Veja como:
 ## Contato
 - Lucas Bruner - lucasbrunerbruner@gmail.com
 - Brenda Bernat - brendalouisebernat@gmail.com
-- Fernanda Beber - nandaa_k@hotmail.com
 
 ## Licença
 Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
