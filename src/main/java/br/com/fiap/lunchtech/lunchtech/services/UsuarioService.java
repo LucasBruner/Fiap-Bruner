@@ -41,7 +41,7 @@ public class UsuarioService {
             handleDataIntegrityViolation(e, usuario.email());
         } catch (RuntimeException e) {
             throw new ResourceNotFoundException("Houve um erro ao criar usuário! " + e.getMessage());
-        }
+        } //verificar questão do find
     }
 
     public void updateUsuario(UsuarioUpdateDTO usuario, String email) {

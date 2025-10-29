@@ -52,7 +52,7 @@ public class UsuarioController {
         summary = "Busca usuários por nome",
         description = "Busca usuários por nome. Deve-se informar na URL um nome para o retorno dos resultados. Retorna uma lista de JSON. Exemplo URL: http://localhost:8080/usuarios/brenda",
         responses = { @ApiResponse(description = "Ok", responseCode = "200")})
-    @GetMapping("/{name}")
+    @GetMapping("/{name}") // Alterar pra utilizar o requestParam
     public ResponseEntity<List<UsuarioResponseDTO>> findUsuarioByName(@PathVariable("name") String name) {
         logger.info("GET -> /usuarios/name");
         List<Usuario> usuario = this.usuarioService.findUsuarioByName(name);

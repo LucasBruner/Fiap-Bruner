@@ -23,7 +23,7 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
 
     @Override
     public List<Usuario> findByName(String nomeUsuario) {
-        return this.jdbcClient.sql("SELECT * FROM USUARIO where upper(nome) = upper(:nomeUsuario)")
+        return this.jdbcClient.sql("SELECT * FROM USUARIO where upper(nome) = upper(:nomeUsuario)")//trocar para like
                 .param("nomeUsuario", nomeUsuario)
                 .query(new UsuarioRowMapper())
                 .list();

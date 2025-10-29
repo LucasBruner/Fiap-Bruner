@@ -47,4 +47,6 @@ public class ControllerExceptionHandler {
         HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
         return ResponseEntity.status(status.value()).body(new CreateUserDTO(e.getMessage(), status.value()));
     }
+
+    //Adicionar o problemDetail
 }
