@@ -45,7 +45,7 @@ Como objetivo final, o projeto deve ser um sistema robusto que permita a restaur
 ## Exemplos de Uso
 
 Para verificar se a aplicação está rodando corretamente e ter acesso aos endpoints, utilize as Collections no Postman, conforme os seguintes passos:
-1. Salve num arquivo local o conteúdo do arquivo `src/main/resources/collections/Lunchtech.postman_collection.json`
+1. Salve num arquivo local o conteúdo do arquivo `collections/Lunchtech.postman_collection.json`
 2. Abra o Postman via desktop ou pela web (https://www.postman.com/)
 3. Na aba "Collections", clique na opção "Import" e selecione o arquivo `.json` salvo no primeiro passo
 4. Cada endpoint possui testes válidos e inválidos que já estão prontos para serem executados!
