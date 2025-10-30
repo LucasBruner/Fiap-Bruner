@@ -24,13 +24,9 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Usuario> findAllUsuarios(int page, int size) {
+    public List<Usuario> findUsers(int page, int size, String name) {
         int offset = (page -1) * size;
-        return this.usuarioRepository.findAll(size, offset);
-    }
-
-    public List<Usuario> findUsuarioByName(String name) {
-        return this.usuarioRepository.findByName(name);
+        return this.usuarioRepository.findUsers(size, offset, name);
     }
 
     public void saveUsuario(UsuarioCreateDTO usuario) {
