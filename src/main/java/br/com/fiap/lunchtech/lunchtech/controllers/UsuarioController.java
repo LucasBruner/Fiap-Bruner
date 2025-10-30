@@ -37,26 +37,16 @@ public class UsuarioController {
     }
 
     @Operation(
-        summary = "Busca todos os usuários",
-        description = "Busca todos os usuários. Deve-se informar a página e o tamanho da paginação para o retorno dos resultados. Retorna uma lista de JSON. Exemplo URL: http://localhost:8080/usuarios?page=1&size=10",
+        summary = "Busca usuários",
+        description = "Busca usuários de forma paginada. O filtro por nome é opcional. Retorna uma lista de JSON. Exemplo (todos): http://localhost:8080/v1/usuarios?page=1&size=10. Exemplo (com filtro): http://localhost:8080/v1/usuarios?page=1&size=10&name=Lucas",
         responses = { @ApiResponse(description = "Ok", responseCode = "200")})
     @GetMapping
-    public ResponseEntity<List<UsuarioResponseDTO>> findAllUsuarios(@RequestParam("page") Integer page,
-                                                         @RequestParam("size") Integer size) {
+    public ResponseEntity<List<UsuarioResponseDTO>> findUsers(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                              @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                              @RequestParam(value = "name", required = false) String name) {
         logger.info("GET -> /usuarios");
-        List<Usuario> usuarios = this.usuarioService.findAllUsuarios(page, size);
+        List<Usuario> usuarios = this.usuarioService.findUsers(page, size, name);
         return ResponseEntity.ok(convertUserToDTO(usuarios));
-    }
-
-    @Operation(
-        summary = "Busca usuários por nome",
-        description = "Busca usuários por nome. Deve-se informar na URL um nome para o retorno dos resultados. Retorna uma lista de JSON. Exemplo URL: http://localhost:8080/usuarios/brenda",
-        responses = { @ApiResponse(description = "Ok", responseCode = "200")})
-    @GetMapping("/{name}")
-    public ResponseEntity<List<UsuarioResponseDTO>> findUsuarioByName(@PathVariable("name") String name) {
-        logger.info("GET -> /usuarios/name");
-        List<Usuario> usuario = this.usuarioService.findUsuarioByName(name);
-        return ResponseEntity.ok(convertUserToDTO(usuario));
     }
 
     @Operation(

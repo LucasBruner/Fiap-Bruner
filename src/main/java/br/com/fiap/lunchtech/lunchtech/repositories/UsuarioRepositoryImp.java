@@ -22,20 +22,23 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     }
 
     @Override
-    public List<Usuario> findByName(String nomeUsuario) {
-        return this.jdbcClient.sql("SELECT * FROM USUARIO where upper(nome) = upper(:nomeUsuario)")
-                .param("nomeUsuario", nomeUsuario)
-                .query(new UsuarioRowMapper())
-                .list();
-    }
+    public List<Usuario> findUsers(int size, int offset, String name) {
+        var sql = new StringBuilder("SELECT * FROM USUARIO");
+        JdbcClient.StatementSpec statement;
 
-    @Override
-    public List<Usuario> findAll(int size, int offset) {
-        return this.jdbcClient.sql("SELECT * FROM USUARIO LIMIT :size OFFSET :offset")
-                .param("size", size)
-                .param("offset", offset)
-                .query(new UsuarioRowMapper())
-                .list();
+        if (name != null && !name.isBlank()) {
+            sql.append(" WHERE lower(nome) LIKE :name");
+        }
+
+        sql.append(" LIMIT :size OFFSET :offset");
+        statement = jdbcClient.sql(sql.toString());
+
+        if (name != null && !name.isBlank()) {
+            statement.param("name", name.toLowerCase());
+        }
+
+        return statement.param("size", size).param("offset", offset)
+                .query(new UsuarioRowMapper()).list();
     }
 
     @Override

@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepository {
-    List<Usuario> findByName(String name);
-    List<Usuario> findAll(int size, int offset);
+    List<Usuario> findUsers(int size, int offset, String name);
     Integer save(UsuarioCreateDTO usuario);
     Integer update (UsuarioUpdateDTO usuario, String email);
     Integer delete(String email);
