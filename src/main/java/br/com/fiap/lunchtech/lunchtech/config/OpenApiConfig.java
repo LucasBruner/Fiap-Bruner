@@ -23,7 +23,7 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public GroupedOpenApi loginApiV1() {
+    public GroupedOpenApi apiV1() {
         return GroupedOpenApi.builder()
                 .group("api-v1")
                 .pathsToMatch("/v1/**")
@@ -31,7 +31,7 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public GroupedOpenApi loginApiV2() {
+    public GroupedOpenApi apiV2() {
         return GroupedOpenApi.builder()
                 .group("api-v2")
                 .pathsToMatch("/v2/**")
