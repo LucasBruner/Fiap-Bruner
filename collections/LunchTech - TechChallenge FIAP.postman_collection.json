@@ -1,17 +1,15 @@
 {
 	"info": {
-		"_postman_id": "7ee62d33-6ae4-477d-a084-5a74b4402bfd",
 		"name": "LunchTech - TechChallenge FIAP",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "49308963",
-		"_collection_link": "https://blbernat-3353651.postman.co/workspace/Brenda's-Workspace~db25d338-4d77-4f10-8afd-35e56a5475c1/collection/49308963-7ee62d33-6ae4-477d-a084-5a74b4402bfd?action=share&source=collection_link&creator=49308963"
+		"_exporter_id": "47549624"
 	},
 	"item": [
 		{
 			"name": "api-v1",
 			"item": [
 				{
-					"name": "Buscar todos os usuarios",
+					"name": "Buscar usuarios",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -40,27 +38,39 @@
 					},
 					"response": []
 				},
-				{
-					"name": "Buscar usuario por nome",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/Brenda",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"usuarios",
-								"Brenda"
-							]
-						}
-					},
-					"response": []
-				},
+              {
+                "name": "Buscar usuarios por nome",
+                "request": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "http://localhost:8080/v1/usuarios?page=1&size=10&name=Brenda",
+                    "protocol": "http",
+                    "host": [
+                      "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                      "v1",
+                      "usuarios"
+                    ],
+                    "query": [
+                      {
+                        "key": "page",
+                        "value": "1"
+                      },
+                      {
+                        "key": "size",
+                        "value": "10"
+                      },                      {
+                        "key": "name",
+                        "value": "Brenda"
+                      }
+                    ]
+                  }
+                },
+                "response": []
+              },
 				{
 					"name": "Cadastro de usuário",
 					"request": {
@@ -215,7 +225,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nome\": \"Brenda\",\r\n        \"email\": \"brenda@fiap.com\",\r\n        \"login\": \"blbernat\",\r\n        \"senha\": \"password\",\r\n        \"endereco\": {\r\n            \"rua\": \"Rua 2 de Setembro\",\r\n            \"numero\": 12345,\r\n            \"cidade\": \"Blumenau\",\r\n            \"cep\": 89055555\r\n        },\r\n        \"tipoUsuario\": \"USUARIO\"\r\n    }",
+							"raw": "{\r\n    \"nome\": \"Brenda\",\r\n    \"email\": \"brenda@fiap.com\",\r\n    \"login\": \"blbernat\",\r\n    \"senha\": \"password\",\r\n    \"endereco\": {\r\n        \"rua\": \"Rua 2 de Setembro\",\r\n        \"numero\": 12345,\r\n        \"cidade\": \"Blumenau\",\r\n        \"cep\": 89055555\r\n    },\r\n    \"tipoUsuario\": \"USUARIO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -320,7 +330,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/usuarios/change-password/joao@fiap.com?password=",
+							"raw": "http://localhost:8080/v1/usuarios/change-password/joao@fiap.com?password",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -335,7 +345,7 @@
 							"query": [
 								{
 									"key": "password"
-                                }
+								}
 							]
 						}
 					},
