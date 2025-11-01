@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -30,24 +32,31 @@ public class UsuarioService {
     }
 
     public void saveUsuario(UsuarioCreateDTO usuario) {
-        try {
-            this.usuarioRepository.save(usuario);
-        } catch (DataIntegrityViolationException e){
-            log.info(e.getMessage());
-            handleDataIntegrityViolation(e, usuario.email());
-        } catch (RuntimeException e) {
-            throw new ResourceNotFoundException("Houve um erro ao criar usuário! " + e.getMessage());
+        Optional<String> validateEmail = this.usuarioRepository.findEmail(usuario.email());
+        if (validateEmail.isPresent()) {
+            throw new CreateUserException("Já existe um usuário cadastrado com este email: " + usuario.email());
+        }
+
+        Integer save = this.usuarioRepository.save(usuario);
+        if (save != 1) {
+            throw new ResourceNotFoundException("Houve um erro ao criar usuário!");
         }
     }
 
     public void updateUsuario(UsuarioUpdateDTO usuario, String email) {
-        try{
-            Integer update = this.usuarioRepository.update(usuario, email);
-            if (update == 0) {
-                throw new ResourceNotFoundException("Usuário não encontrado!");
-            }
-        } catch (DataIntegrityViolationException e) {
-            handleDataIntegrityViolation(e, usuario.email());
+        Optional<String> validateEmail = this.usuarioRepository.findEmail(usuario.email());
+        Optional<String> validateEmailPath = this.usuarioRepository.findEmail(email);
+
+        if (validateEmailPath.isEmpty()) {
+            throw new ResourceNotFoundException("Cadastro com email " + email + " não encontrado!");
+        }
+        if (validateEmail.isPresent() && !validateEmail.stream().findFirst().get().equals(email)) {
+            throw new CreateUserException("Já existe um usuário cadastrado com este email: " + usuario.email());
+        }
+
+        Integer update = this.usuarioRepository.update(usuario, email);
+        if (update == 0) {
+            throw new ResourceNotFoundException("Usuário não encontrado!");
         }
     }
 

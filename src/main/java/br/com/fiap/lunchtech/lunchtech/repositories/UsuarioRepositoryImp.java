@@ -108,4 +108,12 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
                 .query(String.class)
                 .optional();
     }
+
+    @Override
+    public Optional<String> findEmail(String email) {
+        return this.jdbcClient.sql("SELECT max(email) FROM USUARIO where email = :email")
+                .param("email", email)
+                .query(String.class)
+                .optional();
+    }
 }
